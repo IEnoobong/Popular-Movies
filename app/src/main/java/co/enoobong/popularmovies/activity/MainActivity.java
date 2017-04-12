@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
      * helper method to get popular movies
      */
     private void getPopularMovies() {
-        Call<JsonObject> call = API_INTERFACE.getPopularMovies("45b277a70ae24ef78a785fb8e008dbda", 1);
+        Call<JsonObject> call = API_INTERFACE.getPopularMovies(getString(R.string.movie_db_api_key), 1);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
