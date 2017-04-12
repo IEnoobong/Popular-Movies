@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2017. Ibanga Enoobong Ime (Entrepreneur, Developer Marathoner)
   ~
   -->
@@ -8,14 +7,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="co.enoobong.popularmovies.activity.MainActivity">
-    <item android:id="@+id/action_sort"
-        android:orderInCategory="1"
+    <item
+        android:id="@+id/action_sort"
         android:icon="@drawable/ic_action_sort"
+        android:orderInCategory="1"
         android:title="@string/action_sort"
         app:showAsAction="always">
         <menu>
-            <item android:title="@string/top_rated"
-                android:id="@+id/sort_order"/>
+            <item
+                android:id="@+id/sort_order"
+                android:title="@string/top_rated" />
         </menu>
 
     </item>

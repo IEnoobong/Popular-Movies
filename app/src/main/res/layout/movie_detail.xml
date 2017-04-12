@@ -1,13 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2017. Ibanga Enoobong Ime (Entrepreneur, Developer Marathoner)
+  ~
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".activity.MovieDetailActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <FrameLayout
@@ -18,9 +22,9 @@
                 android:id="@+id/im_movie_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/movie_image"
+                android:scaleType="centerCrop"
                 tools:src="@drawable/test" />
 
             <TextView
@@ -29,12 +33,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|start"
                 android:layout_margin="@dimen/text_margin"
-                android:textSize="30sp"
-                android:minLines="2"
                 android:ellipsize="none"
+                android:minLines="2"
                 android:scrollHorizontally="false"
-                android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
                 tools:text="Beauty and the beast" />
 
             <TextView
@@ -44,34 +48,35 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/text_margin"
                 android:scrollHorizontally="false"
-                android:textSize="30sp"
                 android:textColor="@android:color/white"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 tools:text="8.0/10" />
         </FrameLayout>
-            <LinearLayout
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="@dimen/text_margin">
+                android:textStyle="bold"
+                tools:text="2017-03-16" />
 
-                <TextView
-                    android:id="@+id/tv_release_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    tools:text="2017-03-16" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/text_margin" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/text_margin" />
-
-                <TextView
-                    android:id="@+id/tv_overview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    tools:text="Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope." />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_overview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                tools:text="Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope." />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

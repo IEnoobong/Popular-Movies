@@ -20,10 +20,11 @@ import co.enoobong.popularmovies.model.Movies;
 import static co.enoobong.popularmovies.adapter.MoviesAdapter.MOVIE;
 
 
-public class MovieDetailActivity extends AppCompatActivity  {
+public class MovieDetailActivity extends AppCompatActivity {
 
     private TextView mMovieTitle, mMovieRating, mMovieReleaseDate, mMovieOverview;
     private ImageView mMovieBackdrop;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

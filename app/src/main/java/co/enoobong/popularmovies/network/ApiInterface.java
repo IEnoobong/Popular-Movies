@@ -7,9 +7,6 @@ package co.enoobong.popularmovies.network;
 
 import com.google.gson.JsonObject;
 
-import java.util.List;
-
-import co.enoobong.popularmovies.model.Movies;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

@@ -1,8 +1,13 @@
+/*
+ * Copyright (c) 2017. Ibanga Enoobong Ime (Entrepreneur, Developer Marathoner)
+ *
+ */
+
 package co.enoobong.popularmovies;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

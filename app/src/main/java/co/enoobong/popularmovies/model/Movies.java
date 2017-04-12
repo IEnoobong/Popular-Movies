@@ -8,18 +8,20 @@ package co.enoobong.popularmovies.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.gson.Gson;
-import com.google.gson.InstanceCreator;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+public class Movies implements Parcelable {
+    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(Parcel in) {
+            return new Movies(in);
+        }
 
-public class Movies implements Parcelable{
+        @Override
+        public Movies[] newArray(int size) {
+            return new Movies[size];
+        }
+    };
     @SerializedName("overview")
     private String overview;
     @SerializedName("release_date")
@@ -32,11 +34,23 @@ public class Movies implements Parcelable{
     private String posterPath;
     @SerializedName("backdrop_path")
     private String backdropPath;
-
     private String backdropUrl = "https://image.tmdb.org/t/p/w500";
     private String posterUrl = "https://image.tmdb.org/t/p/w185";
 
-    public Movies(){    }
+    public Movies() {
+    }
+
+    protected Movies(Parcel in) {
+        overview = in.readString();
+        releaseDate = in.readString();
+        title = in.readString();
+        voteAverage = in.readDouble();
+        posterPath = in.readString();
+        posterUrl = in.readString();
+        backdropPath = in.readString();
+        backdropUrl = in.readString();
+
+    }
 
     public String getOverview() {
         return overview;
@@ -69,30 +83,6 @@ public class Movies implements Parcelable{
     public String getBackdropUrl() {
         return backdropUrl + getBackdropPath();
     }
-
-    protected Movies(Parcel in) {
-        overview = in.readString();
-        releaseDate = in.readString();
-        title = in.readString();
-        voteAverage = in.readDouble();
-        posterPath = in.readString();
-        posterUrl = in.readString();
-        backdropPath = in.readString();
-        backdropUrl = in.readString();
-
-    }
-
-    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
-        @Override
-        public Movies createFromParcel(Parcel in) {
-            return new Movies(in);
-        }
-
-        @Override
-        public Movies[] newArray(int size) {
-            return new Movies[size];
-        }
-    };
 
     @Override
     public int describeContents() {

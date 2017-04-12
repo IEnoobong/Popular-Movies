@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String SORT_TOP = "Top Rated";
     private static final String SORT_POPULAR = "Popular";
     private static final ApiInterface API_INTERFACE = ApiClient.getClient().create(ApiInterface.class);
-    private static final Type TYPE = new TypeToken<List<Movies>>(){}.getType();
+    private static final Type TYPE = new TypeToken<List<Movies>>() {
+    }.getType();
 
     private RecyclerView mMoviesRecyclerView;
     private ProgressBar mLoadingIndicator;
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         mMoviesRecyclerView = (RecyclerView) findViewById(R.id.rv_movies);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.progressBar);
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        if(savedInstanceState == null || !savedInstanceState.containsKey(MOVIE)){
-            if(Utility.isNetworkConnected(this)){
+        if (savedInstanceState == null || !savedInstanceState.containsKey(MOVIE)) {
+            if (Utility.isNetworkConnected(this)) {
                 getPopularMovies();
             } else {
                 Utility.showDialog(this, android.R.drawable.ic_dialog_alert, R.string.no_network)
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * helper method to load data in views
      */
-    private void loadData(){
+    private void loadData() {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
         mMoviesAdapter = new MoviesAdapter(MainActivity.this, mMoviesList);
         mMoviesRecyclerView.setAdapter(mMoviesAdapter);
@@ -103,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * helper method to get popular movies
      */
-    private void getPopularMovies(){
+    private void getPopularMovies() {
         Call<JsonObject> call = API_INTERFACE.getPopularMovies("45b277a70ae24ef78a785fb8e008dbda", 1);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                mMoviesList = new Gson().fromJson(response.body().getAsJsonArray("results"),TYPE);
+                mMoviesList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
                 loadData();
             }
 
@@ -124,12 +124,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * helper method to get top rated movies
      */
-    private void getTopRatedMovies(){
+    private void getTopRatedMovies() {
         Call<JsonObject> call = API_INTERFACE.getTopRatedMovies(getString(R.string.movie_db_api_key), 1);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                mMoviesList = new Gson().fromJson(response.body().getAsJsonArray("results"),TYPE);
+                mMoviesList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
                 loadData();
             }
 
@@ -151,24 +151,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getTitle().equals(SORT_TOP)){
+        if (item.getTitle().equals(SORT_TOP)) {
             updateView(SORT_TOP);
             item.setTitle(SORT_POPULAR);
-        } else if (item.getTitle().equals(SORT_POPULAR)){
+        } else if (item.getTitle().equals(SORT_POPULAR)) {
             updateView(SORT_POPULAR);
             item.setTitle(SORT_TOP);
         }
         return true;
     }
 
-    /** method to re-query movie db API and update views based on user sort selection
+    /**
+     * method to re-query movie db API and update views based on user sort selection
+     *
      * @param sortChoice selected sort choice
      */
     private void updateView(String sortChoice) {
-        if(sortChoice.equals(SORT_TOP)){
+        if (sortChoice.equals(SORT_TOP)) {
             toolbarLayout.setTitle(getString(R.string.title, SORT_TOP));
             getTopRatedMovies();
-        } else if (sortChoice.equals(SORT_POPULAR)){
+        } else if (sortChoice.equals(SORT_POPULAR)) {
             toolbarLayout.setTitle(getString(R.string.title, SORT_POPULAR));
             getPopularMovies();
         }
