@@ -1,0 +1,12 @@
+<!--Copyright (c) 2017. Ibanga Enoobong Ime (Entrepreneur, Developer Marathoner)-->
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="movie_image">Movie Image</string>
+    <string name="vote_average">%.1f/10</string>
+    <string name="no_network">To continue, connect to a Wi-Fi or mobile network</string>
+    <string name="action_sort">sort</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="title">%s Movies</string>
+</resources>

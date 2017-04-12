@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. Ibanga Enoobong Ime (Entrepreneur, Developer Marathoner)
+  ~
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="co.enoobong.popularmovies.activity.MainActivity">
+    <item android:id="@+id/action_sort"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_action_sort"
+        android:title="@string/action_sort"
+        app:showAsAction="always">
+        <menu>
+            <item android:title="@string/top_rated"
+                android:id="@+id/sort_order"/>
+        </menu>
+
+    </item>
+
+</menu>
