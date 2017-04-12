@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -85,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(MOVIE, mMoviesList);
         super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(MOVIE, mMoviesList);
     }
 
 
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
                 t.printStackTrace();
+                Utility.showToast(MainActivity.this, getString(R.string.error_toast), Toast.LENGTH_LONG);
+
 
             }
         });
@@ -137,11 +140,11 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
                 t.printStackTrace();
+                Utility.showToast(MainActivity.this, getString(R.string.error_toast), Toast.LENGTH_LONG);
 
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

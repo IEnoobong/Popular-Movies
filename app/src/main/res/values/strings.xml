@@ -12,4 +12,5 @@
     <string name="action_sort">sort</string>
     <string name="top_rated">Top Rated</string>
     <string name="title">%s Movies</string>
+    <string name="error_toast">An error occurred, please check your internet connection and try again</string>
 </resources>
