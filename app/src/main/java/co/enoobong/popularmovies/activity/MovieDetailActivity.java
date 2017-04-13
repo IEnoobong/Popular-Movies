@@ -23,7 +23,7 @@ import static co.enoobong.popularmovies.adapter.MoviesAdapter.MOVIE;
 public class MovieDetailActivity extends AppCompatActivity {
 
     private TextView mMovieTitle, mMovieRating, mMovieReleaseDate, mMovieOverview;
-    private ImageView mMovieBackdrop;
+    private ImageView mMoviePoster;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         mMovieRating = (TextView) findViewById(R.id.tv_rating);
         mMovieReleaseDate = (TextView) findViewById(R.id.tv_release_date);
         mMovieOverview = (TextView) findViewById(R.id.tv_overview);
-        mMovieBackdrop = (ImageView) findViewById(R.id.im_movie_backdrop);
+        mMoviePoster = (ImageView) findViewById(R.id.im_movie_poster);
 
         Movies selectedMovie = getIntent().getParcelableExtra(MOVIE);
 
@@ -42,9 +42,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         mMovieReleaseDate.setText(selectedMovie.getReleaseDate());
         mMovieOverview.setText(selectedMovie.getOverview());
         Glide.with(this)
-                .load(selectedMovie.getBackdropUrl())
-                .into(mMovieBackdrop);
-
+                .load(selectedMovie.getPosterUrl())
+                .into(mMoviePoster);
     }
 
 

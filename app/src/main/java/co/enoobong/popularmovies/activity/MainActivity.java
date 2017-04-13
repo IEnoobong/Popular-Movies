@@ -42,12 +42,13 @@ import static co.enoobong.popularmovies.adapter.MoviesAdapter.MOVIE;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String SORT_TOP = "Top Rated";
-    private static final String SORT_POPULAR = "Popular";
+    private static final String SORT_STATE = "sort_state";
+    private final static String SORT_TOP = "Top Rated";
+    private final static String SORT_POPULAR = "Popular";
     private static final ApiInterface API_INTERFACE = ApiClient.getClient().create(ApiInterface.class);
     private static final Type TYPE = new TypeToken<List<Movies>>() {
     }.getType();
-
+    private boolean isTopRated = false;
     private RecyclerView mMoviesRecyclerView;
     private ProgressBar mLoadingIndicator;
     private ArrayList<Movies> mMoviesList;
@@ -65,9 +66,22 @@ public class MainActivity extends AppCompatActivity {
         mMoviesRecyclerView = (RecyclerView) findViewById(R.id.rv_movies);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.progressBar);
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        if (savedInstanceState == null || !savedInstanceState.containsKey(MOVIE)) {
+        if (savedInstanceState == null || !savedInstanceState.containsKey(MOVIE) || !savedInstanceState.containsKey(SORT_STATE)) {
             if (Utility.isNetworkConnected(this)) {
-                getPopularMovies();
+                getMoviesBySortOrder(isTopRated);
+            } else {
+                Utility.showDialog(this, android.R.drawable.ic_dialog_alert, R.string.no_network)
+                        .setPositiveButton(R.string.action_settings, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(new Intent(Settings.ACTION_SETTINGS));
+                            }
+                        })
+                        .show();
+            }
+        } else if (savedInstanceState.getParcelableArrayList(MOVIE) == null) {
+            if (Utility.isNetworkConnected(this)) {
+                getMoviesBySortOrder(isTopRated);
             } else {
                 Utility.showDialog(this, android.R.drawable.ic_dialog_alert, R.string.no_network)
                         .setPositiveButton(R.string.action_settings, new DialogInterface.OnClickListener() {
@@ -80,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             mMoviesList = savedInstanceState.getParcelableArrayList(MOVIE);
+            isTopRated = savedInstanceState.getBoolean(SORT_STATE);
+            if (isTopRated) {
+                toolbarLayout.setTitle(getString(R.string.title, SORT_TOP));
+            } else {
+                toolbarLayout.setTitle(getString(R.string.title, SORT_POPULAR));
+            }
             loadData();
         }
     }
@@ -88,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(MOVIE, mMoviesList);
+        outState.putBoolean(SORT_STATE, isTopRated);
     }
 
 
@@ -155,25 +176,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getTitle().equals(SORT_TOP)) {
-            updateView(SORT_TOP);
+            getMoviesBySortOrder(true);
+            isTopRated = true;
             item.setTitle(SORT_POPULAR);
         } else if (item.getTitle().equals(SORT_POPULAR)) {
-            updateView(SORT_POPULAR);
+            getMoviesBySortOrder(false);
+            isTopRated = false;
             item.setTitle(SORT_TOP);
         }
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.sort_order);
+        if (isTopRated) {
+            menuItem.setTitle(SORT_POPULAR);
+        } else {
+            menuItem.setTitle(SORT_TOP);
+        }
+        return true;
+    }
     /**
      * method to re-query movie db API and update views based on user sort selection
      *
      * @param sortChoice selected sort choice
      */
-    private void updateView(String sortChoice) {
-        if (sortChoice.equals(SORT_TOP)) {
+    private void getMoviesBySortOrder(boolean sortChoice) {
+        if (sortChoice) {
             toolbarLayout.setTitle(getString(R.string.title, SORT_TOP));
             getTopRatedMovies();
-        } else if (sortChoice.equals(SORT_POPULAR)) {
+        } else {
             toolbarLayout.setTitle(getString(R.string.title, SORT_POPULAR));
             getPopularMovies();
         }
