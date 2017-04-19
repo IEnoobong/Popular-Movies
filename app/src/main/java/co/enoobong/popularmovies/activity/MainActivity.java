@@ -67,31 +67,9 @@ public class MainActivity extends AppCompatActivity {
         mLoadingIndicator = (ProgressBar) findViewById(R.id.progressBar);
         toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         if (savedInstanceState == null || !savedInstanceState.containsKey(MOVIE) || !savedInstanceState.containsKey(SORT_STATE)) {
-            if (Utility.isNetworkConnected(this)) {
-                getMoviesBySortOrder(isTopRated);
-            } else {
-                Utility.showDialog(this, android.R.drawable.ic_dialog_alert, R.string.no_network)
-                        .setPositiveButton(R.string.action_settings, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(Settings.ACTION_SETTINGS));
-                            }
-                        })
-                        .show();
-            }
+            getMoviesBySortOrder(isTopRated);
         } else if (savedInstanceState.getParcelableArrayList(MOVIE) == null) {
-            if (Utility.isNetworkConnected(this)) {
-                getMoviesBySortOrder(isTopRated);
-            } else {
-                Utility.showDialog(this, android.R.drawable.ic_dialog_alert, R.string.no_network)
-                        .setPositiveButton(R.string.action_settings, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                startActivity(new Intent(Settings.ACTION_SETTINGS));
-                            }
-                        })
-                        .show();
-            }
+            getMoviesBySortOrder(isTopRated);
         } else {
             mMoviesList = savedInstanceState.getParcelableArrayList(MOVIE);
             isTopRated = savedInstanceState.getBoolean(SORT_STATE);
@@ -205,7 +183,18 @@ public class MainActivity extends AppCompatActivity {
     private void getMoviesBySortOrder(boolean sortChoice) {
         if (sortChoice) {
             toolbarLayout.setTitle(getString(R.string.title, SORT_TOP));
-            getTopRatedMovies();
+            if (Utility.isNetworkConnected(this)) {
+                getTopRatedMovies();
+            } else {
+                Utility.showDialog(this, android.R.drawable.ic_dialog_alert, R.string.no_network)
+                        .setPositiveButton(R.string.action_settings, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                startActivity(new Intent(Settings.ACTION_SETTINGS));
+                            }
+                        })
+                        .show();
+            }
         } else {
             toolbarLayout.setTitle(getString(R.string.title, SORT_POPULAR));
             getPopularMovies();
