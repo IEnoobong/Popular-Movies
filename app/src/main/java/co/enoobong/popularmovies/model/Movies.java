@@ -32,9 +32,8 @@ public class Movies implements Parcelable {
     private Double voteAverage;
     @SerializedName("poster_path")
     private String posterPath;
-    @SerializedName("backdrop_path")
-    private String backdropPath;
-    private String backdropUrl = "https://image.tmdb.org/t/p/w500";
+    @SerializedName("id")
+    private Integer movieId;
     private String posterUrl = "https://image.tmdb.org/t/p/w185";
 
     public Movies() {
@@ -47,8 +46,7 @@ public class Movies implements Parcelable {
         voteAverage = in.readDouble();
         posterPath = in.readString();
         posterUrl = in.readString();
-        backdropPath = in.readString();
-        backdropUrl = in.readString();
+        movieId = in.readInt();
 
     }
 
@@ -76,13 +74,10 @@ public class Movies implements Parcelable {
         return posterUrl + getPosterPath();
     }
 
-    private String getBackdropPath() {
-        return backdropPath;
+    private Integer getMovieId() {
+        return movieId;
     }
 
-    public String getBackdropUrl() {
-        return backdropUrl + getBackdropPath();
-    }
 
     @Override
     public int describeContents() {
@@ -97,7 +92,6 @@ public class Movies implements Parcelable {
         dest.writeDouble(voteAverage);
         dest.writeString(posterPath);
         dest.writeString(posterUrl);
-        dest.writeString(backdropPath);
-        dest.writeString(backdropUrl);
+        dest.writeInt(movieId);
     }
 }

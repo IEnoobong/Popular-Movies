@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     /**
-     * method to re-query movie db API and update views based on user sort selection
+     * method to query movie db API and update views based on user sort selection
      *
      * @param sortChoice selected sort choice
      */

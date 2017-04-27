@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/text_margin"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/play_trailer_selector"
+        android:drawablePadding="8dp"
+        android:drawableStart="@drawable/play_trailer_selector"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp"
+        android:textSize="28sp"
+        tools:text="Trailer 1" />
+
+</LinearLayout>
