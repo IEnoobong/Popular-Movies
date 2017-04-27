@@ -17,11 +17,15 @@ public class Trailer implements Parcelable {
             return new Trailer[size];
         }
     };
+    private final String videoUrl;
     @SerializedName("key")
     private String key;
     @SerializedName("name")
     private String name;
-    private String videoUrl = "https://www.youtube.com/watch?v=";
+
+    public Trailer() {
+        videoUrl = "https://www.youtube.com/watch?v=";
+    }
 
     protected Trailer(Parcel in) {
         key = in.readString();
@@ -29,7 +33,7 @@ public class Trailer implements Parcelable {
         videoUrl = in.readString();
     }
 
-    public String getKey() {
+    private String getKey() {
         return key;
     }
 

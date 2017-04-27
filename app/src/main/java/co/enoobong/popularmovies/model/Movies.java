@@ -74,7 +74,7 @@ public class Movies implements Parcelable {
         return posterUrl + getPosterPath();
     }
 
-    private Integer getMovieId() {
+    public Integer getMovieId() {
         return movieId;
     }
 

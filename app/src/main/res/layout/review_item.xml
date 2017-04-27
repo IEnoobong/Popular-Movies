@@ -7,15 +7,19 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_trailer_name"
+        android:id="@+id/tv_author_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/play_trailer_selector"
-        android:drawablePadding="8dp"
-        android:drawableStart="@drawable/play_trailer_selector"
-        android:paddingBottom="4dp"
-        android:paddingTop="4dp"
         android:textSize="28sp"
-        tools:text="Trailer 1" />
+        android:textStyle="bold"
+        tools:text="Salt-and-Limes" />
+
+    <TextView
+        android:id="@+id/tv_review_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="4"
+        tools:text="@string/review" />
 
 </LinearLayout>

@@ -23,6 +23,9 @@ public class Reviews implements Parcelable {
     @SerializedName("content")
     private String content;
 
+    public Reviews() {
+    }
+
     protected Reviews(Parcel in) {
         author = in.readString();
         content = in.readString();
