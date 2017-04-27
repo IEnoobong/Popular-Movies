@@ -8,6 +8,7 @@ package co.enoobong.popularmovies.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import co.enoobong.popularmovies.R;
@@ -42,7 +44,7 @@ import static co.enoobong.popularmovies.adapter.MoviesAdapter.MOVIE;
 public class MovieDetailActivity extends AppCompatActivity {
 
     private static final ApiInterface API_INTERFACE = ApiClient.getClient().create(ApiInterface.class);
-    private TextView mMovieTitle, mMovieRating, mMovieReleaseDate, mMovieOverview;
+    private TextView mMovieTitle, mMovieRating, mMovieReleaseDate, mMovieOverview, mReview, mTrailer;
     private ImageView mMoviePoster;
     private RecyclerView mTrailerRecycler, mReviewRecycler;
     private ArrayList<Trailer> mTrailersList;
@@ -59,6 +61,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         mMovieRating = (TextView) findViewById(R.id.tv_rating);
         mMovieReleaseDate = (TextView) findViewById(R.id.tv_release_date);
         mMovieOverview = (TextView) findViewById(R.id.tv_overview);
+        mReview = (TextView) findViewById(R.id.tv_reviews);
+        mTrailer = (TextView) findViewById(R.id.tv_trailers);
         mMoviePoster = (ImageView) findViewById(R.id.im_movie_poster);
         mTrailerRecycler = (RecyclerView) findViewById(R.id.rv_trailers);
         mReviewRecycler = (RecyclerView) findViewById(R.id.rv_reviews);
@@ -84,6 +88,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Type trailerType = new TypeToken<List<Trailer>>() {
                 }.getType();
                 mTrailersList = new Gson().fromJson(response.body().getAsJsonArray("results"), trailerType);
+                if (mTrailersList.isEmpty()) mTrailer.setText(getString(R.string.no_trailers));
                 mTrailerAdapter = new TrailerAdapter(MovieDetailActivity.this, mTrailersList);
                 mTrailerRecycler.setAdapter(mTrailerAdapter);
             }
@@ -104,6 +109,8 @@ public class MovieDetailActivity extends AppCompatActivity {
                 Type reviewType = new TypeToken<List<Reviews>>() {
                 }.getType();
                 mReviewsList = new Gson().fromJson(response.body().getAsJsonArray("results"), reviewType);
+                Log.d("TAG", Arrays.toString(mReviewsList.toArray()));
+                if (mReviewsList.isEmpty()) mReview.setText(getString(R.string.no_reviews));
                 mReviewsAdapter = new ReviewsAdapter(MovieDetailActivity.this, mReviewsList);
                 mReviewRecycler.setAdapter(mReviewsAdapter);
             }

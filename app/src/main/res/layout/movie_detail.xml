@@ -84,6 +84,7 @@
                 android:layout_height="@dimen/text_margin" />
 
             <TextView
+                android:id="@+id/tv_trailers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/trailers"
@@ -110,6 +111,7 @@
                 android:layout_height="@dimen/text_margin" />
 
             <TextView
+                android:id="@+id/tv_reviews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/reviews"
