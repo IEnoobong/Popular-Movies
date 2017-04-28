@@ -19,7 +19,7 @@ import java.util.List;
 
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.activity.MovieDetailActivity;
-import co.enoobong.popularmovies.model.Movies;
+import co.enoobong.popularmovies.data.Movies;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 

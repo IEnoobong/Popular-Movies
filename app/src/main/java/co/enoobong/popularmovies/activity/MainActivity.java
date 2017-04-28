@@ -29,7 +29,7 @@ import java.util.List;
 
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.adapter.MoviesAdapter;
-import co.enoobong.popularmovies.model.Movies;
+import co.enoobong.popularmovies.data.Movies;
 import co.enoobong.popularmovies.network.ApiClient;
 import co.enoobong.popularmovies.network.ApiInterface;
 import co.enoobong.popularmovies.utility.Utility;

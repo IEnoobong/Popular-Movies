@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import co.enoobong.popularmovies.R;
-import co.enoobong.popularmovies.model.Trailer;
+import co.enoobong.popularmovies.data.Trailer;
 
 public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerViewHolder> {
 

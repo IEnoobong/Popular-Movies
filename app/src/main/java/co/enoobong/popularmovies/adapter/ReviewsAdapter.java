@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import co.enoobong.popularmovies.R;
-import co.enoobong.popularmovies.model.Reviews;
+import co.enoobong.popularmovies.data.Reviews;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsHolder> {
 

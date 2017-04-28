@@ -3,7 +3,7 @@
  *
  */
 
-package co.enoobong.popularmovies.model;
+package co.enoobong.popularmovies.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
