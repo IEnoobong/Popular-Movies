@@ -21,17 +21,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.activity.MovieDetailActivity;
-import co.enoobong.popularmovies.data.Movies;
+import co.enoobong.popularmovies.data.Movie;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
     public static final String MOVIE = "movie";
     private Context mContext;
-    private List<Movies> mMoviesList;
+    private List<Movie> mMovieList;
 
-    public MoviesAdapter(final Context context, List<Movies> moviesList) {
+    public MoviesAdapter(final Context context, List<Movie> movieList) {
         mContext = context;
-        mMoviesList = moviesList;
+        mMovieList = movieList;
     }
 
     @Override
@@ -42,16 +42,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     @Override
     public void onBindViewHolder(final MovieViewHolder holder, final int position) {
-        holder.setMovieThumbnail(mContext, mMoviesList.get(position).getPosterUrl());
+        holder.setMovieThumbnail(mContext, mMovieList.get(position).getPosterUrl());
     }
 
 
     @Override
     public int getItemCount() {
-        if (mMoviesList == null) {
+        if (mMovieList == null) {
             return 0;
         }
-        return mMoviesList.size();
+        return mMovieList.size();
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -87,7 +87,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
-            intent.putExtra(MOVIE, mMoviesList.get(getAdapterPosition()));
+            intent.putExtra(MOVIE, mMovieList.get(getAdapterPosition()));
             mContext.startActivity(intent);
         }
     }

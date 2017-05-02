@@ -10,16 +10,16 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Movies implements Parcelable {
-    public static final Creator<Movies> CREATOR = new Creator<Movies>() {
+public class Movie implements Parcelable {
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
         @Override
-        public Movies createFromParcel(Parcel in) {
-            return new Movies(in);
+        public Movie createFromParcel(Parcel in) {
+            return new Movie(in);
         }
 
         @Override
-        public Movies[] newArray(int size) {
-            return new Movies[size];
+        public Movie[] newArray(int size) {
+            return new Movie[size];
         }
     };
     @SerializedName("overview")
@@ -36,10 +36,10 @@ public class Movies implements Parcelable {
     private Integer movieId;
     private String posterUrl = "https://image.tmdb.org/t/p/w185";
 
-    public Movies() {
+    public Movie() {
     }
 
-    protected Movies(Parcel in) {
+    protected Movie(Parcel in) {
         overview = in.readString();
         releaseDate = in.readString();
         title = in.readString();

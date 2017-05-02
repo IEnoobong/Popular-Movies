@@ -5,17 +5,17 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Reviews implements Parcelable {
+public class Review implements Parcelable {
 
-    public static final Creator<Reviews> CREATOR = new Creator<Reviews>() {
+    public static final Creator<Review> CREATOR = new Creator<Review>() {
         @Override
-        public Reviews createFromParcel(Parcel in) {
-            return new Reviews(in);
+        public Review createFromParcel(Parcel in) {
+            return new Review(in);
         }
 
         @Override
-        public Reviews[] newArray(int size) {
-            return new Reviews[size];
+        public Review[] newArray(int size) {
+            return new Review[size];
         }
     };
     @SerializedName("author")
@@ -23,10 +23,10 @@ public class Reviews implements Parcelable {
     @SerializedName("content")
     private String content;
 
-    public Reviews() {
+    public Review() {
     }
 
-    protected Reviews(Parcel in) {
+    protected Review(Parcel in) {
         author = in.readString();
         content = in.readString();
     }

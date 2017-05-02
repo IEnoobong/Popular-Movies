@@ -31,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.adapter.MoviesAdapter;
-import co.enoobong.popularmovies.data.Movies;
+import co.enoobong.popularmovies.data.Movie;
 import co.enoobong.popularmovies.network.ApiClient;
 import co.enoobong.popularmovies.network.ApiInterface;
 import co.enoobong.popularmovies.utility.Utility;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private final static String SORT_TOP = "Top Rated";
     private final static String SORT_POPULAR = "Popular";
     private static final ApiInterface API_INTERFACE = ApiClient.getClient().create(ApiInterface.class);
-    private static final Type TYPE = new TypeToken<List<Movies>>() {
+    private static final Type TYPE = new TypeToken<List<Movie>>() {
     }.getType();
     @BindView(R.id.rv_movies)
     RecyclerView mMoviesRecyclerView;
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar_layout)
     CollapsingToolbarLayout toolbarLayout;
     private boolean isTopRated = false;
-    private ArrayList<Movies> mMoviesList;
+    private ArrayList<Movie> mMovieList;
     private MoviesAdapter mMoviesAdapter;
 
 
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (savedInstanceState.getParcelableArrayList(MOVIE) == null) {
             getMoviesBySortOrder(isTopRated);
         } else {
-            mMoviesList = savedInstanceState.getParcelableArrayList(MOVIE);
+            mMovieList = savedInstanceState.getParcelableArrayList(MOVIE);
             isTopRated = savedInstanceState.getBoolean(SORT_STATE);
             if (isTopRated) {
                 toolbarLayout.setTitle(getString(R.string.title, SORT_TOP));
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(MOVIE, mMoviesList);
+        outState.putParcelableArrayList(MOVIE, mMovieList);
         outState.putBoolean(SORT_STATE, isTopRated);
     }
 
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadData() {
         mLoadingIndicator.setVisibility(View.INVISIBLE);
-        mMoviesAdapter = new MoviesAdapter(MainActivity.this, mMoviesList);
+        mMoviesAdapter = new MoviesAdapter(MainActivity.this, mMovieList);
         mMoviesRecyclerView.setAdapter(mMoviesAdapter);
     }
 
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                mMoviesList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
+                mMovieList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
                 loadData();
             }
 
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                mMoviesList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
+                mMovieList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
                 loadData();
             }
 

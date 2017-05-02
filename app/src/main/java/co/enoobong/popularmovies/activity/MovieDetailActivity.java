@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.adapter.ReviewsAdapter;
 import co.enoobong.popularmovies.adapter.TrailerAdapter;
-import co.enoobong.popularmovies.data.Movies;
+import co.enoobong.popularmovies.data.Movie;
 import co.enoobong.popularmovies.data.Reviews;
 import co.enoobong.popularmovies.data.Trailer;
 import co.enoobong.popularmovies.network.ApiClient;
@@ -68,7 +68,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ArrayList<Reviews> mReviewsList;
     private TrailerAdapter mTrailerAdapter;
     private ReviewsAdapter mReviewsAdapter;
-    private Movies selectedMovie;
+    private Movie selectedMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
