@@ -65,8 +65,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     RecyclerView mTrailerRecycler;
     @BindView(R.id.rv_reviews)
     RecyclerView mReviewRecycler;
-    private ArrayList<Trailer> mTrailersList;
-    private ArrayList<Review> mReviewsList;
+    private ArrayList<Trailer> mTrailersList = new ArrayList<>();
+    private ArrayList<Review> mReviewsList = new ArrayList<>();
     private TrailerAdapter mTrailerAdapter;
     private ReviewsAdapter mReviewsAdapter;
     private Movie selectedMovie;
@@ -85,6 +85,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         mMovieOverview.setText(selectedMovie.getOverview());
         Glide.with(this)
                 .load(selectedMovie.getPosterUrl())
+                .error(R.drawable.ic_error_black_24dp)
                 .into(mMoviePoster);
         getTrailers();
         getReviews();
@@ -170,7 +171,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 selection, selectionArgs);
     }
 
-    private void addMovieToFavorites() {
+    synchronized private void addMovieToFavorites() {
         getContentResolver().insert(FavoritesContract.buildMovieUriWithId(selectedMovie.getMovieId()),
                 DatabaseUtils.getMovieDetails(this, selectedMovie));
         if (!mTrailersList.isEmpty())
