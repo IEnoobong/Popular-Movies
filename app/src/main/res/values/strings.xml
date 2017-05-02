@@ -18,4 +18,5 @@
     <string name="review">but it failed to capture the magic of the cartoon version. There were somethings that </string>
     <string name="no_reviews">No Reviews</string>
     <string name="no_trailers">No trailers</string>
+    <string name="favorite">Favorite</string>
 </resources>

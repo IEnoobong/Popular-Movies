@@ -75,7 +75,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         void setMovieThumbnail(final Context context, final String imageUrl) {
             Glide.with(context)
                     .load(imageUrl)
-                    .thumbnail(0.1f)
                     .into(mMovieThumbnail);
         }
 

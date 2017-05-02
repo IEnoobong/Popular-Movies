@@ -17,6 +17,11 @@
             <item
                 android:id="@+id/sort_order"
                 android:title="@string/top_rated" />
+
+            <item
+                android:id="@+id/sort_favorite"
+                android:title="@string/favorite"
+                android:visible="false" />
         </menu>
 
     </item>

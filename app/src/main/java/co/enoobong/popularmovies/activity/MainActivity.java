@@ -7,6 +7,7 @@ package co.enoobong.popularmovies.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -31,6 +32,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.adapter.MoviesAdapter;
+import co.enoobong.popularmovies.data.DatabaseUtils;
+import co.enoobong.popularmovies.data.FavoritesContract;
 import co.enoobong.popularmovies.data.Movie;
 import co.enoobong.popularmovies.network.ApiClient;
 import co.enoobong.popularmovies.network.ApiInterface;
@@ -164,19 +167,31 @@ public class MainActivity extends AppCompatActivity {
             getMoviesBySortOrder(false);
             isTopRated = false;
             item.setTitle(SORT_TOP);
+        } else if (item.getItemId() == R.id.sort_favorite) {
+            getFavoriteMovies();
         }
         return true;
     }
 
+    private void getFavoriteMovies() {
+        mMovieList = DatabaseUtils.getFavoriteMovies(this);
+        toolbarLayout.setTitle(getString(R.string.title, getString(R.string.favorite)));
+        loadData();
+    }
+
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        invalidateOptionsMenu();
         MenuItem menuItem = menu.findItem(R.id.sort_order);
         if (isTopRated) {
             menuItem.setTitle(SORT_POPULAR);
         } else {
             menuItem.setTitle(SORT_TOP);
         }
-        return true;
+        if (isFavoritesAvailable()) {
+            menu.findItem(R.id.sort_favorite).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
     }
     /**
      * method to query movie db API and update views based on user sort selection
@@ -202,5 +217,17 @@ public class MainActivity extends AppCompatActivity {
             toolbarLayout.setTitle(getString(R.string.title, SORT_POPULAR));
             getPopularMovies();
         }
+    }
+
+    private boolean isFavoritesAvailable() {
+        String[] projection = {FavoritesContract.MoviesEntry._ID};
+        String selection = FavoritesContract.MoviesEntry._ID + " IS NOT NULL";
+        Cursor cursor = getContentResolver().query(FavoritesContract.MOVIES_CONTENT_URI,
+                projection,
+                selection,
+                null,
+                null,
+                null);
+        return (cursor != null ? cursor.getCount() : 0) > 0;
     }
 }
