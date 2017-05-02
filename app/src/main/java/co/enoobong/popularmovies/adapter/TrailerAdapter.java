@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.data.Trailer;
 
@@ -47,11 +49,12 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
 
     class TrailerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        final TextView mTrailerName;
+        @BindView(R.id.tv_trailer_name)
+        TextView mTrailerName;
 
         public TrailerViewHolder(View itemView) {
             super(itemView);
-            mTrailerName = (TextView) itemView.findViewById(R.id.tv_trailer_name);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 

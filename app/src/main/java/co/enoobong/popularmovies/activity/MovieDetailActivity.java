@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.adapter.ReviewsAdapter;
 import co.enoobong.popularmovies.adapter.TrailerAdapter;
@@ -44,9 +46,24 @@ import static co.enoobong.popularmovies.adapter.MoviesAdapter.MOVIE;
 public class MovieDetailActivity extends AppCompatActivity {
 
     private static final ApiInterface API_INTERFACE = ApiClient.getClient().create(ApiInterface.class);
-    private TextView mMovieTitle, mMovieRating, mMovieReleaseDate, mMovieOverview, mReview, mTrailer;
-    private ImageView mMoviePoster;
-    private RecyclerView mTrailerRecycler, mReviewRecycler;
+    @BindView(R.id.tv_movie_title)
+    TextView mMovieTitle;
+    @BindView(R.id.tv_rating)
+    TextView mMovieRating;
+    @BindView(R.id.tv_release_date)
+    TextView mMovieReleaseDate;
+    @BindView(R.id.tv_overview)
+    TextView mMovieOverview;
+    @BindView(R.id.tv_reviews)
+    TextView mReview;
+    @BindView(R.id.tv_trailers)
+    TextView mTrailer;
+    @BindView(R.id.im_movie_poster)
+    ImageView mMoviePoster;
+    @BindView(R.id.rv_trailers)
+    RecyclerView mTrailerRecycler;
+    @BindView(R.id.rv_reviews)
+    RecyclerView mReviewRecycler;
     private ArrayList<Trailer> mTrailersList;
     private ArrayList<Reviews> mReviewsList;
     private TrailerAdapter mTrailerAdapter;
@@ -57,15 +74,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.movie_detail);
-        mMovieTitle = (TextView) findViewById(R.id.tv_movie_title);
-        mMovieRating = (TextView) findViewById(R.id.tv_rating);
-        mMovieReleaseDate = (TextView) findViewById(R.id.tv_release_date);
-        mMovieOverview = (TextView) findViewById(R.id.tv_overview);
-        mReview = (TextView) findViewById(R.id.tv_reviews);
-        mTrailer = (TextView) findViewById(R.id.tv_trailers);
-        mMoviePoster = (ImageView) findViewById(R.id.im_movie_poster);
-        mTrailerRecycler = (RecyclerView) findViewById(R.id.rv_trailers);
-        mReviewRecycler = (RecyclerView) findViewById(R.id.rv_reviews);
+        ButterKnife.bind(this);
 
         selectedMovie = getIntent().getParcelableExtra(MOVIE);
 
@@ -75,6 +84,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         mMovieOverview.setText(selectedMovie.getOverview());
         Glide.with(this)
                 .load(selectedMovie.getPosterUrl())
+                .thumbnail(0.1f)
                 .into(mMoviePoster);
         getTrailers();
         getReviews();

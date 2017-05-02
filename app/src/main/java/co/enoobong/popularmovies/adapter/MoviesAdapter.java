@@ -17,6 +17,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.activity.MovieDetailActivity;
 import co.enoobong.popularmovies.data.Movies;
@@ -54,11 +56,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private ImageView mMovieThumbnail;
+        @BindView(R.id.iv_movie)
+        ImageView mMovieThumbnail;
 
         public MovieViewHolder(final View itemView) {
             super(itemView);
-            mMovieThumbnail = (ImageView) itemView.findViewById(R.id.iv_movie);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
@@ -72,6 +75,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         void setMovieThumbnail(final Context context, final String imageUrl) {
             Glide.with(context)
                     .load(imageUrl)
+                    .thumbnail(0.1f)
                     .into(mMovieThumbnail);
         }
 

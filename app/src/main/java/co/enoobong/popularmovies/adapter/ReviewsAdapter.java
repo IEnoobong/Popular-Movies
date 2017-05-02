@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.data.Reviews;
 
@@ -43,13 +45,14 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsH
     }
 
     class ReviewsHolder extends RecyclerView.ViewHolder {
-
-        final TextView mAuthorName, mReview;
+        @BindView(R.id.tv_author_name)
+        TextView mAuthorName;
+        @BindView(R.id.tv_review_content)
+        TextView mReview;
 
         public ReviewsHolder(View itemView) {
             super(itemView);
-            mAuthorName = (TextView) itemView.findViewById(R.id.tv_author_name);
-            mReview = (TextView) itemView.findViewById(R.id.tv_review_content);
+            ButterKnife.bind(this, itemView);
         }
 
         void setAuthorName(String authorName) {

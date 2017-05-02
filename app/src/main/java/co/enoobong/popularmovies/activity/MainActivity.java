@@ -27,6 +27,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.adapter.MoviesAdapter;
 import co.enoobong.popularmovies.data.Movies;
@@ -48,12 +50,15 @@ public class MainActivity extends AppCompatActivity {
     private static final ApiInterface API_INTERFACE = ApiClient.getClient().create(ApiInterface.class);
     private static final Type TYPE = new TypeToken<List<Movies>>() {
     }.getType();
+    @BindView(R.id.rv_movies)
+    RecyclerView mMoviesRecyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar mLoadingIndicator;
+    @BindView(R.id.toolbar_layout)
+    CollapsingToolbarLayout toolbarLayout;
     private boolean isTopRated = false;
-    private RecyclerView mMoviesRecyclerView;
-    private ProgressBar mLoadingIndicator;
     private ArrayList<Movies> mMoviesList;
     private MoviesAdapter mMoviesAdapter;
-    private CollapsingToolbarLayout toolbarLayout;
 
 
     @Override
@@ -62,10 +67,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
-        mMoviesRecyclerView = (RecyclerView) findViewById(R.id.rv_movies);
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.progressBar);
-        toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         if (savedInstanceState == null || !savedInstanceState.containsKey(MOVIE) || !savedInstanceState.containsKey(SORT_STATE)) {
             getMoviesBySortOrder(isTopRated);
         } else if (savedInstanceState.getParcelableArrayList(MOVIE) == null) {
