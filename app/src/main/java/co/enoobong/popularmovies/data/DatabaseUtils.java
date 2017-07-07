@@ -63,6 +63,7 @@ public class DatabaseUtils {
         } catch (NullPointerException e) {
             e.printStackTrace();
         } finally {
+            assert cursor != null;
             cursor.close();
         }
         return moviesList;
