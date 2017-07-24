@@ -31,7 +31,7 @@ import co.enoobong.popularmovies.adapter.ReviewsAdapter;
 import co.enoobong.popularmovies.adapter.TrailerAdapter;
 import co.enoobong.popularmovies.data.DatabaseUtils;
 import co.enoobong.popularmovies.data.FavoritesContract;
-import co.enoobong.popularmovies.data.Movie;
+import co.enoobong.popularmovies.data.MovieKt;
 import co.enoobong.popularmovies.data.Review;
 import co.enoobong.popularmovies.data.Trailer;
 import co.enoobong.popularmovies.network.ApiClient;
@@ -69,7 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ArrayList<Review> mReviewsList = new ArrayList<>();
     private TrailerAdapter mTrailerAdapter;
     private ReviewsAdapter mReviewsAdapter;
-    private Movie selectedMovie;
+    private MovieKt selectedMovie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

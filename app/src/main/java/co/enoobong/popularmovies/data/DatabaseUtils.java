@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DatabaseUtils {
 
-    public static ContentValues getMovieDetails(Context context, Movie movie) {
+    public static ContentValues getMovieDetails(Context context, MovieKt movie) {
         Glide.with(context).load(movie.getPosterUrl()).downloadOnly(500, 500);
         ContentValues contentValues = new ContentValues();
         contentValues.put(FavoritesContract.MoviesEntry.COLUMN_TITLE, movie.getTitle());
@@ -22,7 +22,7 @@ public class DatabaseUtils {
         return contentValues;
     }
 
-    public static ContentValues getTrailerDetails(Movie movie, ArrayList<Trailer> trailerList) {
+    public static ContentValues getTrailerDetails(MovieKt movie, ArrayList<Trailer> trailerList) {
         ContentValues contentValues = new ContentValues();
         for (Trailer trailer : trailerList) {
             contentValues.put(FavoritesContract.TrailerEntry.COLUMN_NAME, trailer.getName());
@@ -32,7 +32,7 @@ public class DatabaseUtils {
         return contentValues;
     }
 
-    public static ContentValues getReviewDetails(Movie movie, ArrayList<Review> reviewsList) {
+    public static ContentValues getReviewDetails(MovieKt movie, ArrayList<Review> reviewsList) {
         ContentValues contentValues = new ContentValues();
         for (Review review : reviewsList) {
             contentValues.put(FavoritesContract.ReviewsEntry.COLUMN_AUTHOR, review.getAuthor());
@@ -42,8 +42,8 @@ public class DatabaseUtils {
         return contentValues;
     }
 
-    public static ArrayList<Movie> getFavoriteMovies(Context context) {
-        ArrayList<Movie> moviesList = new ArrayList<>();
+    public static ArrayList<MovieKt> getFavoriteMovies(Context context) {
+        ArrayList<MovieKt> moviesList = new ArrayList<>();
         Cursor cursor = context.getContentResolver().query(FavoritesContract.MOVIES_CONTENT_URI,
                 null,
                 null,
@@ -51,7 +51,7 @@ public class DatabaseUtils {
                 null);
         try {
             while (cursor != null && cursor.moveToNext()) {
-                Movie movie = new Movie();
+                MovieKt movie = new MovieKt();
                 movie.setMovieId(cursor.getInt(cursor.getColumnIndexOrThrow(FavoritesContract.MoviesEntry.COLUMN_ID)));
                 movie.setOverview(cursor.getString(cursor.getColumnIndexOrThrow(FavoritesContract.MoviesEntry.COLUMN_OVERVIEW)));
                 movie.setPosterPath(cursor.getString(cursor.getColumnIndexOrThrow(FavoritesContract.MoviesEntry.COLUMN_POSTER_PATH)));

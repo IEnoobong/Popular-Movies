@@ -21,15 +21,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
 import co.enoobong.popularmovies.activity.MovieDetailActivity;
-import co.enoobong.popularmovies.data.Movie;
+import co.enoobong.popularmovies.data.MovieKt;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
 
     public static final String MOVIE = "movie";
     private Context mContext;
-    private List<Movie> mMovieList;
+    private List<MovieKt> mMovieList;
 
-    public MoviesAdapter(final Context context, List<Movie> movieList) {
+    public MoviesAdapter(final Context context, List<MovieKt> movieList) {
         mContext = context;
         mMovieList = movieList;
     }
