@@ -32,8 +32,8 @@ import co.enoobong.popularmovies.adapter.TrailerAdapter;
 import co.enoobong.popularmovies.data.DatabaseUtils;
 import co.enoobong.popularmovies.data.FavoritesContract;
 import co.enoobong.popularmovies.data.MovieKt;
-import co.enoobong.popularmovies.data.Review;
-import co.enoobong.popularmovies.data.Trailer;
+import co.enoobong.popularmovies.data.ReviewKt;
+import co.enoobong.popularmovies.data.TrailerKt;
 import co.enoobong.popularmovies.network.ApiClient;
 import co.enoobong.popularmovies.network.ApiInterface;
 import co.enoobong.popularmovies.utility.Utility;
@@ -65,8 +65,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     RecyclerView mTrailerRecycler;
     @BindView(R.id.rv_reviews)
     RecyclerView mReviewRecycler;
-    private ArrayList<Trailer> mTrailersList = new ArrayList<>();
-    private ArrayList<Review> mReviewsList = new ArrayList<>();
+    private ArrayList<TrailerKt> mTrailersList = new ArrayList<>();
+    private ArrayList<ReviewKt> mReviewsList = new ArrayList<>();
     private TrailerAdapter mTrailerAdapter;
     private ReviewsAdapter mReviewsAdapter;
     private MovieKt selectedMovie;
@@ -96,7 +96,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Type trailerType = new TypeToken<List<Trailer>>() {
+                Type trailerType = new TypeToken<List<TrailerKt>>() {
                 }.getType();
                 mTrailersList = new Gson().fromJson(response.body().getAsJsonArray("results"), trailerType);
                 if (mTrailersList.isEmpty()) mTrailer.setText(getString(R.string.no_trailers));
@@ -117,7 +117,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Type reviewType = new TypeToken<List<Review>>() {
+                Type reviewType = new TypeToken<List<ReviewKt>>() {
                 }.getType();
                 mReviewsList = new Gson().fromJson(response.body().getAsJsonArray("results"), reviewType);
                 if (mReviewsList.isEmpty()) mReview.setText(getString(R.string.no_reviews));

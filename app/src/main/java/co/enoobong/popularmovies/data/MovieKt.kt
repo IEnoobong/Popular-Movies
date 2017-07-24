@@ -20,7 +20,7 @@ data class MovieKt(
         var movieId: Int = -1) : Parcelable {
 
     var posterUrl = _posterUrl
-        get() = "https://image.tmdb.org/t/p/w185" + posterPath
+        get() = "https://image.tmdb.org/t/p/w185$posterPath"
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
-import co.enoobong.popularmovies.data.Review;
+import co.enoobong.popularmovies.data.ReviewKt;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsHolder> {
 
     private Context mContext;
-    private ArrayList<Review> mReviewsList;
+    private ArrayList<ReviewKt> mReviewsList;
 
-    public ReviewsAdapter(Context context, ArrayList<Review> reviewsList) {
+    public ReviewsAdapter(Context context, ArrayList<ReviewKt> reviewsList) {
         mContext = context;
         mReviewsList = reviewsList;
     }

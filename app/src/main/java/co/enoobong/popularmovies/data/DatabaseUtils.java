@@ -22,9 +22,9 @@ public class DatabaseUtils {
         return contentValues;
     }
 
-    public static ContentValues getTrailerDetails(MovieKt movie, ArrayList<Trailer> trailerList) {
+    public static ContentValues getTrailerDetails(MovieKt movie, ArrayList<TrailerKt> trailerList) {
         ContentValues contentValues = new ContentValues();
-        for (Trailer trailer : trailerList) {
+        for (TrailerKt trailer : trailerList) {
             contentValues.put(FavoritesContract.TrailerEntry.COLUMN_NAME, trailer.getName());
             contentValues.put(FavoritesContract.TrailerEntry.COLUMN_VIDEO_URL, trailer.getVideoUrl());
         }
@@ -32,9 +32,9 @@ public class DatabaseUtils {
         return contentValues;
     }
 
-    public static ContentValues getReviewDetails(MovieKt movie, ArrayList<Review> reviewsList) {
+    public static ContentValues getReviewDetails(MovieKt movie, ArrayList<ReviewKt> reviewsList) {
         ContentValues contentValues = new ContentValues();
-        for (Review review : reviewsList) {
+        for (ReviewKt review : reviewsList) {
             contentValues.put(FavoritesContract.ReviewsEntry.COLUMN_AUTHOR, review.getAuthor());
             contentValues.put(FavoritesContract.ReviewsEntry.COLUMN_CONTENT, review.getContent());
         }

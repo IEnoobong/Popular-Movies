@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.enoobong.popularmovies.R;
-import co.enoobong.popularmovies.data.Trailer;
+import co.enoobong.popularmovies.data.TrailerKt;
 
 public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerViewHolder> {
 
     public static final String TRAILER = "trailers";
     private Context mContext;
-    private ArrayList<Trailer> mTrailers;
+    private ArrayList<TrailerKt> mTrailers;
 
-    public TrailerAdapter(Context context, ArrayList<Trailer> trailers) {
+    public TrailerAdapter(Context context, ArrayList<TrailerKt> trailers) {
         mContext = context;
         mTrailers = trailers;
     }
