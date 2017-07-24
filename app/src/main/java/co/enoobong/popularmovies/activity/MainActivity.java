@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.annotation.VisibleForTesting;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +37,6 @@ import co.enoobong.popularmovies.data.FavoritesContract;
 import co.enoobong.popularmovies.data.MovieKt;
 import co.enoobong.popularmovies.network.ApiClient;
 import co.enoobong.popularmovies.network.ApiInterface;
-import co.enoobong.popularmovies.utility.EspressoIdlingResource;
 import co.enoobong.popularmovies.utility.Utility;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -113,14 +110,12 @@ public class MainActivity extends AppCompatActivity {
      * helper method to get popular movies
      */
     private void getPopularMovies() {
-        EspressoIdlingResource.increment();
         Call<JsonObject> call = API_INTERFACE.getPopularMovies(getString(R.string.movie_db_api_key), 1);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 mMovieList = new Gson().fromJson(response.body().getAsJsonArray("results"), TYPE);
                 loadData();
-                EspressoIdlingResource.decrement();
             }
 
             @Override
@@ -232,10 +227,5 @@ public class MainActivity extends AppCompatActivity {
                 null,
                 null);
         return (cursor != null ? cursor.getCount() : 0) > 0;
-    }
-
-    @VisibleForTesting
-    public IdlingResource getCountingIdlingResource() {
-        return EspressoIdlingResource.getIdlingResource();
     }
 }
